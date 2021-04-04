@@ -1,13 +1,11 @@
-
-DROP DATABASE IF EXISTS 		Testing_System_Assignment_2;
-CREATE DATABASE 				Testing_System_Assignment_2;
-USE 							Testing_System_Assignment_2;
+-- DROP DATABASE IF EXISTS 		Testing_System_Assignment_3;
+CREATE DATABASE 				Testing_System_Assignment_3;
+USE 							Testing_System_Assignment_3;
 
 CREATE TABLE IF NOT EXISTS `Department` (
     DepartmentID INT PRIMARY KEY AUTO_INCREMENT,
     DepartmentNAME VARCHAR(50)
 );
-
 
 INSERT INTO `Department`			(`DepartmentID`,`DepartmentNAME`)
 VALUES  							(1, 	'Marketing'),
@@ -20,7 +18,19 @@ VALUES  							(1, 	'Marketing'),
                                     (8, 	'Giam doc'),
                                     (9, 	'Thu ki'),
                                     (10, 	'Ban hang');
--- SELECT * FROM 	Department;
+-- cau 2                                   
+SELECT * FROM `Department`;
+SELECT * FROM `Department` WHERE DepartmentNAME ='Sale' ;
+
+-- Tinh ten dai nhat
+SELECT CHAR_LENGTH(FullName) AS lenghtT FROM `Account` ORDER BY lenghtT DESC LIMIT 1;
+-- Tim ra nguoi co ten dai nhat , minh vua tim duoc cau tren 
+SELECT * FROM `Account` WHERE char_length(FullName) = (SELECT CHAR_LENGTH(FullName) AS lenghtT FROM `Account` ORDER BY lenghtT DESC LIMIT 1);
+
+
+
+            
+SELECT `DepartmentID` FROM `Department` WHERE `DepartmentNAME` = 'Sale';                         
                                     
 CREATE TABLE IF NOT EXISTS Position (
     PositionID 					INT PRIMARY KEY AUTO_INCREMENT,
@@ -31,10 +41,8 @@ INSERT INTO `Position` (PositionName)
 VALUE					('DEV'),
 						('Test'),
                         ('Scrum Master'),
-                        ('PM');		
-                        
--- SELECT * FROM 	Position;                       
-                        
+                        ('PM');
+
 CREATE TABLE IF NOT EXISTS `Account` (
      AccountID 					INT PRIMARY KEY AUTO_INCREMENT,
      Email 						VARCHAR(50)UNIQUE KEY,
@@ -56,10 +64,9 @@ VALUES					('haidang29productions@gmail.com','dangblack','5','1','2020-03-05'),
                         ('sontungmtp@gmail.com','tungnui','8','1','2020-04-07'),
                         ('duongghuu@gmail.com','dungghuu','9','2','2020-04-07'),
                         ('vtiaccademy@gmail.com','vtiaccademy','10','1','2020-04-09');
+                  
+SELECT FullName FROM `Account` WHERE Char_length(FullName)= (SELECT max(char_length(FullName)) FROM `Account`);
                         
--- SHOW COLUMNS FROM `Account`;                       
--- SELECT * FROM `Account`;
-
 CREATE TABLE IF NOT EXISTS `Group` (
     GroupID 					INT PRIMARY KEY AUTO_INCREMENT,
     GroupName 					VARCHAR(50),
@@ -79,8 +86,8 @@ VALUE				('Testing System','5','2019-03-05'),
                     ('Chat With Love','9','2020-04-09'),
                     ('Vi Ti Ai','10','2020-04-10');
                     
--- SHOW COLUMNS FROM `Group`;
--- SELECT * FROM `Group`;
+SELECT * FROM `Group` ORDER BY CreatorID,CreatorDate;
+
 
 CREATE TABLE IF NOT EXISTS GroupAccont (
     GroupID 					INT,
@@ -99,8 +106,7 @@ VALUE						('1','1','2019-03-07'),
                             ('8','3','2020-04-08'),
                             ('1','9','2020-04-09'),
                             ('10','10','2020-04-10');
-						
--- SELECT * FROM `GroupAccont`;                        
+                            
 
 CREATE TABLE IF NOT EXISTS TypeQuestion (
      TypeID 					INT PRIMARY KEY AUTO_INCREMENT,
@@ -111,7 +117,6 @@ INSERT INTO TypeQuestion 	(TypeName)
 VALUE						('Essay'),
 							('Multiple-Choice');
 
--- SELECT * FROM `TypeQuestion`;
 
 CREATE TABLE IF NOT EXISTS CategoryQuestion (
 	CategoryID 					INT PRIMARY KEY AUTO_INCREMENT,
@@ -129,8 +134,6 @@ VALUE 							('Jave'),
                                 ('C++'),
                                 ('C Sharp'),
 							    ('PHP');
-
--- SELECT * FROM `CategoryQuestion`;
 
 CREATE TABLE IF NOT EXISTS Question (
      QuestionID 				INT PRIMARY KEY AUTO_INCREMENT,
@@ -153,8 +156,6 @@ VALUE 						('Câu hỏi về Java','1','1','2','2020-04-05'),
 							('Hỏi về SQL','4','2','9','2020-04-07'),
 							('Hỏi về Python','7','1','10','2020-04-07');
 
--- SELECT * FROM `Question`;
-
 CREATE TABLE IF NOT EXISTS Answer (
      AnswerID 					INT PRIMARY KEY AUTO_INCREMENT,
      Content 					VARCHAR(50),
@@ -162,19 +163,19 @@ CREATE TABLE IF NOT EXISTS Answer (
      isCorect 					VARCHAR(50)
 );
 
-INSERT INTO `Answer` 		(Content,QuestionID,isCorect)
-VALUE						('Trả lời 01','1','0'),
-							('Trả lời 02','1','1'),
-							('Trả lời 03','1','0'),
-							('Trả lời 04','1','1'),
-							('Trả lời 05','2','1'),
-							('Trả lời 06','3','1'),
-							('Trả lời 07','4','0'),
-							('Trả lời 08','8','0'),
-							('Trả lời 09','9','1'),
-							('Trả lời 10','10','1');
+INSERT INTO `Answer` 		(Content,			QuestionID,		isCorect)
+VALUE						('Trả lời 01',		'1',			'0'),
+							('Trả lời 02',		'1',			'1'),
+							('Trả lời 03',		'1',			'0'),
+							('Trả lời 04',		'1',			'1'),
+							('Trả lời 05',		'2',			'1'),
+							('Trả lời 06',		'3',			'1'),
+							('Trả lời 07',		'4',			'0'),
+							('Trả lời 08',		'8',			'0'),
+							('Trả lời 09',		'9',			'1'),
+							('Trả lời 10',		'10',			'1');
                             
--- SELECT * FROM `Answer`;                            
+SELECT QuestionID FROM `Answer` GROUP BY QuestionID HAVING COUNT(QuestionID) >= 4;                     
 
 CREATE TABLE IF NOT EXISTS Exam (
      ExamID 					INT PRIMARY KEY AUTO_INCREMENT,
@@ -190,16 +191,15 @@ CREATE TABLE IF NOT EXISTS Exam (
 INSERT INTO Exam		(`Code`,title,CategoryID,Duration,CreatorID,CreateDate)
 VALUE 					('VTIQ001','Đề thi C#','1','60','5','2019-04-05'),
 						('VTIQ002','Đề thi PHP','10','60','2','2019-04-05'),
-						('VTIQ003','Đề thi C++','9','120','2','2019-04-07'),
-						('VTIQ004','Đề thi Java','6','60','3','2019-04-08'),
-						('VTIQ005','Đề thi Ruby','5','120','4','2019-04-10'),
-						('VTIQ006','Đề thi Postman','3','60','6','2019-04-05'),
-						('VTIQ007','Đề thi SQL','2','60','7','2019-04-05'),
-						('VTIQ008','Đề thi Python','8','60','8','2019-04-07'),
-						('VTIQ009','Đề thi ADO.NET','4','90','9','2019-04-07'),
-						('VTIQ010','Đề thi ASP.NET','7','90','10','2019-04-08');
+						('VTIQ003','Đề thi C#','1','60','5','2019-04-05'),
+						('VTIQ004','Đề thi C#','1','60','5','2019-04-05'),
+						('VTIQ005','Đề thi C#','1','60','5','2019-04-05'),
+						('VTIQ006','Đề thi C#','1','60','5','2019-04-05'),
+						('VTIQ007','Đề thi C#','1','60','5','2019-04-05'),
+						('VTIQ008','Đề thi C#','1','60','5','2019-04-05'),
+						('VTIQ009','Đề thi C#','1','60','5','2019-04-05'),
+						('VTIQ010','Đề thi C#','1','60','5','2019-04-05');
 
--- SELECT * FROM `Exam`;
 
 CREATE TABLE IF NOT EXISTS ExamQuestion (
      ExamID 					INT,
@@ -217,3 +217,4 @@ VALUE					('1','5'),
 						('8','10'),
 						('9','9'),
 						('10','8');
+                        
