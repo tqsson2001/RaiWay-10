@@ -173,6 +173,7 @@ CREATE TABLE IF NOT EXISTS Exam (
      CreateDate 				DATE
 );
 
+## QQQQ
 INSERT INTO Exam		(`Code`,title,CategoryID,Duration,CreatorID,CreateDate)
 VALUE 					('VTIQ001','Đề thi C#','1','60','5','2019-04-05'),
 						('VTIQ002','Đề thi PHP','10','60','2','2019-04-05'),
