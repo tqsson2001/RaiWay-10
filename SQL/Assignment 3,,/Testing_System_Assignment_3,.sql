@@ -1,8 +1,6 @@
 DROP DATABASE IF EXISTS 		Testing_System_Assignment_3;
 CREATE DATABASE 				Testing_System_Assignment_3;
-USE 							Testing_System_Assignment_2;
-
-DROP TABLE IF EXISTS `Deapartment`;
+USE 							Testing_System_Assignment_3;
 
 CREATE TABLE IF NOT EXISTS `Department` (
     DepartmentID INT PRIMARY KEY AUTO_INCREMENT,
@@ -23,7 +21,7 @@ VALUES  							(1, 	'Marketing'),
                                     (10, 	'Ban hang');
                                     
 -- Cau 10                                    
-SELECT DepartmentNAME, count(*) FROM Department WHERE DepartmentID = 2 ;
+SELECT count(DepartmentID) AS 'SO NHAN VEN' FROM Department WHERE DepartmentID = 2 ;
 
 -- Cau 2
 SELECT * FROM 	Department;
@@ -53,20 +51,30 @@ CREATE TABLE IF NOT EXISTS `Account` (
      CreateDate 				DATE
 );
 
-INSERT INTO `Account`	(Email,FullName,DepartmentID,PositionID,CreateDate)
-VALUES					('haidang29productions@gmail.com','dangblack','5','1','2020-03-05'),
-						('account1@gmail.com','quanganh','1','2','2020-03-05'),
-                        ('account2@gmail.com','vanchien','2','3','2020-03-07'),
-                        ('account3@gmail.com','cocoduongqua','3','4','2020-08-03'),
-                        ('account4@gmail.com','doccocaubai','4','4','2020-03-10'),
-                        ('dapphatchetngay@gmail.com','khabanh','6','3','2020-04-05'),
-                        ('songcodaoly@gmail.com','huanhoahong','7','2','2020-03-25'),
-                        ('sontungmtp@gmail.com','tungnui','8','1','2020-04-07'),
-                        ('duongghuu@gmail.com','dungghuu','9','2','2020-04-07'),
-                        ('vtiaccademy@gmail.com','vtiaccademy','10','1','2020-04-09');
-             
+INSERT INTO `Account`	(AccountID,Email,FullName,DepartmentID,PositionID,CreateDate)
+VALUES					('1','haidang29productions@gmail.com','dangblack','5','1','2020-03-05'),
+						('2','account1@gmail.com','quanganh','1','2','2020-03-05'),
+                        ('3','account2@gmail.com','vanchien','2','3','2020-03-07'),
+                        ('4','account3@gmail.com','cocoduongqua','3','4','2020-08-03'),
+                        ('5','account4@gmail.com','doccocaubai','4','4','2020-03-10'),
+                        ('6','dapphatchetngay@gmail.com','khabanh','6','3','2020-04-05'),
+                        ('7','songcodaoly@gmail.com','huanhoahong','7','2','2020-03-25'),
+                        ('8','sontungmtp@gmail.com','tungnui','8','1','2020-04-07'),
+                        ('9','duongghuu@gmail.com','dungghuu','9','2','2020-04-07'),
+                        ('10','vtiaccademy@gmail.com','vtiaccademy','10','1','2020-04-09');
+
+-- Cau 14 
+UPDATE `Account` SET FullName = 'Nguyen Ba Loc' , Email = 'loc.nguyenba@vti.com.vn' WHERE `AccountID` = 5 ;
+
+-- Cau 5 
+SELECT * FROM `Account` WHERE length(FullName) = (SELECT max(length(FULLName)) FROM `Account`) AND DepartmentID = '3'  ;
+
+-- Cau 4            
+SELECT max(length(FULLName)) FROM `Account`;
+SELECT * FROM `Account` WHERE length(FullName) = (SELECT max(length(FULLName)) FROM `Account`);
+            
 -- Cau 11              
-SELECT * FROM `Account` WHERE FullName LIKE 'd&o' ;
+SELECT FullName FROM `Account` WHERE FullName LIKE 'd&o' ;
 
 CREATE TABLE IF NOT EXISTS `Group` (
     GroupID 					INT PRIMARY KEY AUTO_INCREMENT,
@@ -75,17 +83,17 @@ CREATE TABLE IF NOT EXISTS `Group` (
     CreatorDate 				DATE
 );
 
-INSERT INTO `Group` (GroupName,CreatorID,CreatorDate)
-VALUE				('Testing System','5','2019-03-05'),
-					('VTI Development','1','2020-03-07'),
-                    ('VTI Sale01','2','2020-03-09'),
-                    ('VTI Sale02','3','2020-03-10'),
-                    ('VTI Sale03','4','2020-03-28'),
-                    ('VTI Creator','6','2020-04-06'),
-                    ('VTI Marketing 01','7','2020-04-07'),
-                    ('Management','8','2020-04-08'),
-                    ('Chat With Love','9','2020-04-09'),
-                    ('Vi Ti Ai','10','2020-04-10');
+INSERT INTO `Group` (GroupID,GroupName,CreatorID,CreatorDate)
+VALUE				('1','Testing System','5','2019-03-05'),
+					('2','VTI Development','1','2020-03-07'),
+                    ('3','VTI Sale01','2','2020-03-09'),
+                    ('4','VTI Sale02','3','2020-03-10'),
+                    ('5','VTI Sale03','4','2020-03-28'),
+                    ('6','VTI Creator','6','2020-04-06'),
+                    ('7','VTI Marketing 01','7','2020-04-07'),
+                    ('8','Management','8','2020-04-08'),
+                    ('9','Chat With Love','9','2020-04-09'),
+                    ('10','Vi Ti Ai','10','2020-04-10');
                     
 -- Cau 6                     
 SELECT `GroupName` FROM `Group` WHERE CreatorDate < '2019-12-20';
@@ -143,26 +151,29 @@ VALUE 							('Jave'),
 
 CREATE TABLE IF NOT EXISTS Question (
      QuestionID 				INT PRIMARY KEY AUTO_INCREMENT,
-     Content 					VARCHAR(50),
+     Content 					VARCHAR(50) UNIQUE KEY,
      CategoryID 				INT,
      TypeID 					INT,
      CreatorID 					INT,
      CreatorDate 				DATE
 );
 
-INSERT INTO Question 		(Content,CategoryID,TypeID,CreatorID,CreatorDate)
-VALUE 						('Câu hỏi về Java','1','1','2','2020-04-05'),
-							('Câu Hỏi về PHP','10','2','2','2020-04-05'),
-							('Hỏi về C#','9','2','3','2020-04-06'),
-							('Hỏi về Ruby','6','1','4','2020-04-06'),
-							('Hỏi về Postman','5','1','5','2020-04-06'),
-							('Hỏi về ADO.NET','3','2','6','2020-04-06'),
-							('Hỏi về ASP.NET','2','1','7','2020-04-06'),
-							('Hỏi về C++','8','1','8','2020-04-07'),
-							('Hỏi về SQL','4','2','9','2020-04-07'),
-							('Hỏi về Python','7','1','10','2020-04-07');
+INSERT INTO Question 		(QuestionID,Content,CategoryID,TypeID,CreatorID,CreatorDate)
+VALUE 						('1','Câu Hỏi về Java','1','1','2','2020-04-05'),
+							('2','Câu Hỏi về PHP','10','2','2','2020-04-05'),
+							('3','Hỏi về C#','9','2','3','2020-04-06'),
+							('4','Hỏi về Ruby','6','1','4','2020-04-06'),
+							('5','Hỏi về Postman','5','1','5','2020-04-06'),
+							('6','Hỏi về ADO.NET','3','2','6','2020-04-06'),
+							('7','Hỏi về ASP.NET','2','1','7','2020-04-06'),
+							('8','Hỏi về C++','8','1','8','2020-04-07'),
+							('9','Hỏi về SQL','4','2','9','2020-04-07'),
+							('10','Hỏi về Python','7','1','10','2020-04-07');
+-- Cau 13 
+DELETE FROM Question WHERE Content LIKE 'Câu Hỏi&' ;
 
-SELECT 
+-- Cau 7
+SELECT QuestionID FROM Question WHERE CategoryID >= '4' ;
 
 CREATE TABLE IF NOT EXISTS Answer (
      AnswerID 					INT PRIMARY KEY AUTO_INCREMENT,
@@ -186,32 +197,33 @@ VALUE						('Trả lời 01','1','0'),
                           
 
 CREATE TABLE IF NOT EXISTS Exam (
-     ExamID 					INT PRIMARY KEY AUTO_INCREMENT,
+     ExamID 					INT PRIMARY KEY AUTO_INCREMENT ,
      `Code` 					VARCHAR(50),
      Title 						VARCHAR(50),
      CategoryID 				INT,
      Duration 					VARCHAR(50),
      CreatorID 					INT,
-     CreateDate 				DATE
+     CreateDate 				DATE 
 );
 
 
-INSERT INTO Exam		(`Code`,title,CategoryID,Duration,CreatorID,CreateDate)
-VALUE 					('VTIQ001','Đề thi C#','1','60','5','2019-04-05'),
-						('VTIQ002','Đề thi PHP','10','60','2','2019-04-05'),
-						('VTIQ003','Đề thi C++','9','120','2','2019-04-07'),
-						('VTIQ004','Đề thi Java','6','60','3','2019-04-08'),
-						('VTIQ005','Đề thi Ruby','5','120','4','2019-04-10'),
-						('VTIQ006','Đề thi Postman','3','60','6','2019-04-05'),
-						('VTIQ007','Đề thi SQL','2','60','7','2019-04-05'),
-						('VTIQ008','Đề thi Python','8','60','8','2019-04-07'),
-						('VTIQ009','Đề thi ADO.NET','4','90','9','2019-04-07'),
-						('VTIQ010','Đề thi ASP.NET','7','90','10','2019-04-08');
+INSERT INTO Exam		(ExamID,`Code`,title,CategoryID,Duration,CreatorID,CreateDate)
+VALUE 					('1','VTIQ001','Đề thi C#','1','60','5','2019-04-05'),
+						('2','VTIQ002','Đề thi PHP','10','60','2','2019-04-05'),
+						('3','VTIQ003','Đề thi C++','9','120','2','2019-04-07'),
+						('4','VTIQ004','Đề thi Java','6','60','3','2019-04-08'),
+						('5','VTIQ005','Đề thi Ruby','5','120','4','2019-04-10'),
+						('6','VTIQ006','Đề thi Postman','3','60','6','2019-04-05'),
+						('7','VTIQ007','Đề thi SQL','2','60','7','2019-04-05'),
+						('8','VTIQ008','Đề thi Python','8','60','8','2019-04-07'),
+						('9','VTIQ009','Đề thi ADO.NET','4','90','9','2019-04-07'),
+						('10','VTIQ010','Đề thi ASP.NET','7','90','10','2019-04-08');
 
-DELETE FROM Exam WHERE CreateDate < '2019-12-20' ;
+-- DELETE FROM `Exam` WHERE CreateDate < '2019-12-20' ; Cau 12
 
 -- Cau 8
-SELECT CategoryID FROM Exam WHERE CreateDate < '2019-12-20' AND Duration >= '60' ;
+ SELECT `Code` FROM Exam WHERE Duration >= '60' AND CreateDate < '2019-12-29' ;
+
 
 CREATE TABLE IF NOT EXISTS ExamQuestion (
      ExamID 					INT,
@@ -229,3 +241,5 @@ VALUE					('1','5'),
 						('8','10'),
 						('9','9'),
 						('10','8');
+          -- CÂU 12 EM KHÔNG THAO TÁC ĐƯỢC , CÂU 13 THÌ LẠI ĐƯỢC 
+           -- CÒN CÂU 15 EM ĐANG KO HIỂU ĐỀ BÀI 
