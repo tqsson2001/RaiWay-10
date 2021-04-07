@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS Position (
 	PositionName 				VARCHAR(50)
 );
 
-INSERT INTO `Position` (PositionName)
-VALUE					('DEV'),
-						('Test'),
-                        ('Scrum Master'),
-                        ('PM');		
+INSERT INTO `Position` (PositionID,PositionName)
+VALUE					('1','DEV'),
+						('2','Test'),
+                        ('3','Scrum Master'),
+                        ('4','PM');		
                         
                     
                         
@@ -118,16 +118,15 @@ VALUE						('1','1','2019-03-07'),
                             ('1','9','2020-04-09'),
                             ('10','10','2020-04-10');
 						
-               
 
 CREATE TABLE IF NOT EXISTS TypeQuestion (
      TypeID 					INT PRIMARY KEY AUTO_INCREMENT,
      TypeName 					VARCHAR(50)
 ); 
 
-INSERT INTO TypeQuestion 	(TypeName)
-VALUE						('Essay'),
-							('Multiple-Choice');
+INSERT INTO TypeQuestion 	(TypeID,TypeName)
+VALUE						('1','Essay'),
+							('2','Multiple-Choice');
 
 
 
@@ -136,17 +135,17 @@ CREATE TABLE IF NOT EXISTS CategoryQuestion (
     CategoryName 				VARCHAR(50)
 );
 
-INSERT INTO CategoryQuestion 	(CategoryName)
-VALUE 							('Jave'),
-								('ASP.NET'),
-                                ('ADO.NET'),
-                                ('SQL'),
-                                ('Postman'),
-                                ('Ruby'),
-                                ('Python'),
-                                ('C++'),
-                                ('C Sharp'),
-							    ('PHP');
+INSERT INTO CategoryQuestion 	(CategoryID,CategoryName)
+VALUE 							('1','Jave'),
+								('2','ASP.NET'),
+                                ('3','ADO.NET'),
+                                ('4','SQL'),
+                                ('5','Postman'),
+                                ('6','Ruby'),
+                                ('7','Python'),
+                                ('8','C++'),
+                                ('9','C Sharp'),
+							    ('10','PHP');
 
 
 CREATE TABLE IF NOT EXISTS Question (
@@ -182,17 +181,17 @@ CREATE TABLE IF NOT EXISTS Answer (
      isCorect 					VARCHAR(50)
 );
 
-INSERT INTO `Answer` 		(Content,QuestionID,isCorect)
-VALUE						('Trả lời 01','1','0'),
-							('Trả lời 02','1','1'),
-							('Trả lời 03','1','0'),
-							('Trả lời 04','1','1'),
-							('Trả lời 05','2','1'),
-							('Trả lời 06','3','1'),
-							('Trả lời 07','4','0'),
-							('Trả lời 08','8','0'),
-							('Trả lời 09','9','1'),
-							('Trả lời 10','10','1');
+INSERT INTO `Answer` 		(AnswerID,Content,QuestionID,isCorect)
+VALUE						('1','Trả lời 01','1','0'),
+							('2','Trả lời 02','1','1'),
+							('3','Trả lời 03','1','0'),
+							('4','Trả lời 04','1','1'),
+							('5','Trả lời 05','2','1'),
+							('6','Trả lời 06','3','1'),
+							('7','Trả lời 07','4','0'),
+							('8','Trả lời 08','8','0'),
+							('9','Trả lời 09','9','1'),
+							('10','Trả lời 10','10','1');
                             
                           
 
@@ -241,5 +240,5 @@ VALUE					('1','5'),
 						('8','10'),
 						('9','9'),
 						('10','8');
-          -- CÂU 12 EM KHÔNG THAO TÁC ĐƯỢC , CÂU 13 THÌ LẠI ĐƯỢC 
+          -- CÂU 12 EM KHÔNG THAO TÁC ĐƯỢC 
            -- CÒN CÂU 15 EM ĐANG KO HIỂU ĐỀ BÀI 
