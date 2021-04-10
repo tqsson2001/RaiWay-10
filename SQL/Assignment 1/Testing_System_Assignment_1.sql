@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS Testing_System_Assignment_1;
 CREATE DATABASE IF NOT EXISTS Testing_System_Assignment_1;
 USE Testing_System_Assignment_1;
 
@@ -5,9 +6,9 @@ CREATE TABLE IF NOT EXISTS Department (
     DepartmentID INT PRIMARY KEY AUTO_INCREMENT,
     DepartmentNAME VARCHAR(50)
 );
-CREATE TABLE IF NOT EXISTS Position (
-    PositionID INT PRIMARY KEY AUTO_INCREMENT,
-	PositionNAME VARCHAR(50)
+CREATE TABLE IF NOT EXISTS `Posittion` (
+    PosittionID INT PRIMARY KEY AUTO_INCREMENT,
+	PosittionNAME VARCHAR(50)
 );
 CREATE TABLE IF NOT EXISTS `Account` (
      AccountID INT PRIMARY KEY AUTO_INCREMENT,
@@ -25,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `Group` (
     CreatorID INT,
     CreatorDATE DATE
 );
-CREATE TABLE IF NOT EXISTS GroupAccont (
+CREATE TABLE IF NOT EXISTS GroupAccount (
     GroupID INT,
     AccountID INT,
     JoinDate DATE
@@ -44,17 +45,17 @@ CREATE TABLE IF NOT EXISTS Question (
      CategoryID INT,
      TypeID INT,
      CreatorID INT,
-     CreatorDate DATE
+     CreateDate DATE
 );
 CREATE TABLE IF NOT EXISTS Answer (
-     AnswerID INT PRIMARY KEY AUTO_INCREMENT,
+     Answers INT PRIMARY KEY AUTO_INCREMENT,
      Content VARCHAR(50),
      QuestionID INT,
-     isCrrect VARCHAR(50)
+     isCorrect VARCHAR(50)
 );
 CREATE TABLE IF NOT EXISTS Exam (
      ExamID INT PRIMARY KEY AUTO_INCREMENT,
-     Code VARCHAR(50),
+     `Code` VARCHAR(50),
      Title VARCHAR(50),
      CategoryID INT,
      Duration VARCHAR(50),

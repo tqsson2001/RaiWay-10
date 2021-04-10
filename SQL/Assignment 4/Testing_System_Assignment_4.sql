@@ -8,33 +8,29 @@ CREATE TABLE IF NOT EXISTS `Department` (
 );
 
 
-
 INSERT INTO `Department`			(`DepartmentID`,`DepartmentNAME`)
-VALUES  							('1', 	'Marketing'),
-									('2', 	'Sale'),
-                                    ('3', 	'Bao ve'),
-                                    ('4', 	'Nhan su'),
-                                    ('5', 	'Ky thuat'),
-                                    ('6', 	'Tai chinh'),
-                                    ('7', 	'Pho giam doc'),
-                                    ('8', 	'Giam doc'),
-                                    ('9', 	'Thu ki'),
-                                    ('10', 	'Ban hang');
-           
-				
-                
-CREATE TABLE IF NOT EXISTS `Position` (
-    PositionID 					INT PRIMARY KEY AUTO_INCREMENT,
-	PositionName 				VARCHAR(50)
+VALUES  							(1, 	'Marketing'),
+									(2, 	'Sale'),
+                                    (3, 	'Bao ve'),
+                                    (4, 	'Nhan su'),
+                                    (5, 	'Ky thuat'),
+                                    (6, 	'Tai chinh'),
+                                    (7, 	'Pho giam doc'),
+                                    (8, 	'Giam doc'),
+                                    (9, 	'Thu ki'),
+                                    (10, 	'Ban hang');
+                                    
+CREATE TABLE IF NOT EXISTS Posittion (
+    PosittionID 					INT PRIMARY KEY AUTO_INCREMENT,
+	PosittionName 					VARCHAR(50)
 );
 
-INSERT INTO `Position` (PositionID,PositionName)
+INSERT INTO `Posittion` (PosittionID,PosittionName)
 VALUE					('1','DEV'),
 						('2','Test'),
                         ('3','Scrum Master'),
                         ('4','PM');		
-                        
-		
+                                              
                         
 CREATE TABLE IF NOT EXISTS `Account` (
      AccountID 					INT PRIMARY KEY AUTO_INCREMENT,
@@ -42,11 +38,12 @@ CREATE TABLE IF NOT EXISTS `Account` (
      Username 					VARCHAR(50) UNIQUE KEY,
      FullName 					VARCHAR(50),
      DepartmentID 				INT,
-     PositionID 				INT,
+     PosittionID 				INT,
      CreateDate 				DATE
 );
 
-INSERT INTO `Account`	(AccountID,Email,FullName,DepartmentID,PositionID,CreateDate)
+
+INSERT INTO `Account`	(AccountID,Email,FullName,DepartmentID,PosittionID,CreateDate)
 VALUES					('1','haidang29productions@gmail.com','dangblack','5','1','2020-03-05'),
 						('2','account1@gmail.com','quanganh','1','2','2020-03-05'),
                         ('3','account2@gmail.com','vanchien','2','3','2020-03-07'),
@@ -58,23 +55,16 @@ VALUES					('1','haidang29productions@gmail.com','dangblack','5','1','2020-03-05
                         ('9','duongghuu@gmail.com','dungghuu','9','2','2020-04-07'),
                         ('10','vtiaccademy@gmail.com','vtiaccademy','10','1','2020-04-09');
                         
--- Cau 4 chưa có dữ liệu tổng phòng ban có bao nhiêu người                        
--- SELECT * FROM `Account` A JOIN `Department` D ON A.DepartmentID = D.DepartmentID WHERE 
-
--- Cau 2
-SELECT * FROM `Account`A JOIN Department D ON A.DepartmentID = D.DepartmentID WHERE CreateDate < '2010-12-20';
-
--- Cau 1
-SELECT * FROM `Department`D JOIN `Account`A ON  D.DepartmentID = A.DepartmentID ;
 
 CREATE TABLE IF NOT EXISTS `Group` (
     GroupID 					INT PRIMARY KEY AUTO_INCREMENT,
     GroupName 					VARCHAR(50),
     CreatorID 					INT,
-    CreatorDate 				DATE
+    CreateDate 				DATE
 );
 
-INSERT INTO `Group` (GroupID,GroupName,CreatorID,CreatorDate)
+
+INSERT INTO `Group` (GroupID ,GroupName,CreatorID,CreateDate)
 VALUE				('1','Testing System','5','2019-03-05'),
 					('2','VTI Development','1','2020-03-07'),
                     ('3','VTI Sale01','2','2020-03-09'),
@@ -86,16 +76,14 @@ VALUE				('1','Testing System','5','2019-03-05'),
                     ('9','Chat With Love','9','2020-04-09'),
                     ('10','Vi Ti Ai','10','2020-04-10');
                     
--- Cau 3
-SELECT *  FROM `Group` G JOIN Question Q WHERE G.CreatorID = Q.CreatorID ;
 
-CREATE TABLE IF NOT EXISTS `GroupAccont` (
+CREATE TABLE IF NOT EXISTS GroupAccount (
     GroupID 					INT,
     AccountID 					INT,
     JoinDate 					DATE
 );
 
-INSERT INTO `GroupAccont` 	(GroupID,AccountID,JoinDate)
+INSERT INTO `GroupAccount` 	(GroupID,AccountID,JoinDate)
 VALUE						('1','1','2019-03-07'),
 							('1','2','2020-03-07'),
                             ('3','3','2020-03-09'),
@@ -106,9 +94,9 @@ VALUE						('1','1','2019-03-07'),
                             ('8','3','2020-04-08'),
                             ('1','9','2020-04-09'),
                             ('10','10','2020-04-10');
-						
+						                     
 
-CREATE TABLE IF NOT EXISTS `TypeQuestion` (
+CREATE TABLE IF NOT EXISTS TypeQuestion (
      TypeID 					INT PRIMARY KEY AUTO_INCREMENT,
      TypeName 					VARCHAR(50)
 ); 
@@ -116,7 +104,6 @@ CREATE TABLE IF NOT EXISTS `TypeQuestion` (
 INSERT INTO TypeQuestion 	(TypeID,TypeName)
 VALUE						('1','Essay'),
 							('2','Multiple-Choice');
-
 
 
 CREATE TABLE IF NOT EXISTS CategoryQuestion (
@@ -139,15 +126,15 @@ VALUE 							('1','Jave'),
 
 CREATE TABLE IF NOT EXISTS Question (
      QuestionID 				INT PRIMARY KEY AUTO_INCREMENT,
-     Content 					VARCHAR(50) UNIQUE KEY,
+     Content 					VARCHAR(50),
      CategoryID 				INT,
      TypeID 					INT,
      CreatorID 					INT,
-     CreatorDate 				DATE
+     CreateDate 				DATE
 );
 
-INSERT INTO Question 		(QuestionID,Content,CategoryID,TypeID,CreatorID,CreatorDate)
-VALUE 						('1','Câu Hỏi về Java','1','1','2','2020-04-05'),
+INSERT INTO Question 		(QuestionID,Content,CategoryID,TypeID,CreatorID,CreateDate)
+VALUE 						('1','Câu hỏi về Java','1','1','2','2020-04-05'),
 							('2','Câu Hỏi về PHP','10','2','2','2020-04-05'),
 							('3','Hỏi về C#','9','2','3','2020-04-06'),
 							('4','Hỏi về Ruby','6','1','4','2020-04-06'),
@@ -158,14 +145,15 @@ VALUE 						('1','Câu Hỏi về Java','1','1','2','2020-04-05'),
 							('9','Hỏi về SQL','4','2','9','2020-04-07'),
 							('10','Hỏi về Python','7','1','10','2020-04-07');
 
-CREATE TABLE IF NOT EXISTS `Answer` (
-     AnswerID 					INT PRIMARY KEY AUTO_INCREMENT,
+
+CREATE TABLE IF NOT EXISTS Answer (
+     Answers 					INT PRIMARY KEY AUTO_INCREMENT,
      Content 					VARCHAR(50),
      QuestionID 				INT,
-     isCorect 					VARCHAR(50)
+     isCorrect					VARCHAR(50)
 );
 
-INSERT INTO `Answer` 		(AnswerID,Content,QuestionID,isCorect)
+INSERT INTO `Answer` 		(Answers,Content,QuestionID,isCorrect)
 VALUE						('1','Trả lời 01','1','0'),
 							('2','Trả lời 02','1','1'),
 							('3','Trả lời 03','1','0'),
@@ -176,17 +164,16 @@ VALUE						('1','Trả lời 01','1','0'),
 							('8','Trả lời 08','8','0'),
 							('9','Trả lời 09','9','1'),
 							('10','Trả lời 10','10','1');
-                            
-                          
+                                                      
 
 CREATE TABLE IF NOT EXISTS Exam (
-     ExamID 					INT PRIMARY KEY AUTO_INCREMENT ,
+     ExamID 					INT PRIMARY KEY AUTO_INCREMENT,
      `Code` 					VARCHAR(50),
      Title 						VARCHAR(50),
      CategoryID 				INT,
      Duration 					VARCHAR(50),
      CreatorID 					INT,
-     CreateDate 				DATE 
+     CreateDate 				DATE
 );
 
 
@@ -201,15 +188,14 @@ VALUE 					('1','VTIQ001','Đề thi C#','1','60','5','2019-04-05'),
 						('8','VTIQ008','Đề thi Python','8','60','8','2019-04-07'),
 						('9','VTIQ009','Đề thi ADO.NET','4','90','9','2019-04-07'),
 						('10','VTIQ010','Đề thi ASP.NET','7','90','10','2019-04-08');
--- Cau 5 
-SELECT count(Content) FROM Question Q JOIN  Exam E ON Q.CategoryID = E.CategoryID LIMIT 1 ;
+
 
 CREATE TABLE IF NOT EXISTS ExamQuestion (
      ExamID 					INT,
      QuestionID 				INT
 );
 
-INSERT INTO 			ExamQuestion(ExamID,QuestionID)
+INSERT INTO ExamQuestion(ExamID,QuestionID)
 VALUE					('1','5'),
 						('2','4'),
 						('3','4'),
@@ -220,5 +206,3 @@ VALUE					('1','5'),
 						('8','10'),
 						('9','9'),
 						('10','8');
-
-         

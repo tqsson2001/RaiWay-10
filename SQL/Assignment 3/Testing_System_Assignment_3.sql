@@ -28,12 +28,12 @@ SELECT * FROM 	Department;
 -- Cau 3
 SELECT DepartmentID FROM Department WHERE DepartmentNAME = 'Sale';
  
-CREATE TABLE IF NOT EXISTS Position (
-    PositionID 					INT PRIMARY KEY AUTO_INCREMENT,
-	PositionName 				VARCHAR(50)
+CREATE TABLE IF NOT EXISTS Posittion (
+    PosittionID 					INT PRIMARY KEY AUTO_INCREMENT,
+	PosittionName 					VARCHAR(50)
 );
 
-INSERT INTO `Position` (PositionID,PositionName)
+INSERT INTO `Posittion` (PosittionID,PosittionName)
 VALUE					('1','DEV'),
 						('2','Test'),
                         ('3','Scrum Master'),
@@ -47,11 +47,11 @@ CREATE TABLE IF NOT EXISTS `Account` (
      Username 					VARCHAR(50) UNIQUE KEY,
      FullName 					VARCHAR(50),
      DepartmentID 				INT,
-     PositionID 				INT,
+     PosittionID 				INT,
      CreateDate 				DATE
 );
 
-INSERT INTO `Account`	(AccountID,Email,FullName,DepartmentID,PositionID,CreateDate)
+INSERT INTO `Account`	(AccountID,Email,FullName,DepartmentID,PosittionID,CreateDate)
 VALUES					('1','haidang29productions@gmail.com','dangblack','5','1','2020-03-05'),
 						('2','account1@gmail.com','quanganh','1','2','2020-03-05'),
                         ('3','account2@gmail.com','vanchien','2','3','2020-03-07'),
@@ -80,10 +80,10 @@ CREATE TABLE IF NOT EXISTS `Group` (
     GroupID 					INT PRIMARY KEY AUTO_INCREMENT,
     GroupName 					VARCHAR(50),
     CreatorID 					INT,
-    CreatorDate 				DATE
+    CreateDate 					DATE
 );
 
-INSERT INTO `Group` (GroupID,GroupName,CreatorID,CreatorDate)
+INSERT INTO `Group` (GroupID,GroupName,CreatorID,CreateDate)
 VALUE				('1','Testing System','5','2019-03-05'),
 					('2','VTI Development','1','2020-03-07'),
                     ('3','VTI Sale01','2','2020-03-09'),
@@ -96,17 +96,17 @@ VALUE				('1','Testing System','5','2019-03-05'),
                     ('10','Vi Ti Ai','10','2020-04-10');
                     
 -- Cau 6                     
-SELECT `GroupName` FROM `Group` WHERE CreatorDate < '2019-12-20';
+SELECT `GroupName` FROM `Group` WHERE CreateDate < '2019-12-20';
 -- Cau 9
-SELECT `GroupName` FROM `Group` ORDER BY CreatorDate DESC LIMIT 5 ;
+SELECT `GroupName` FROM `Group` ORDER BY CreateDate DESC LIMIT 5 ;
 
-CREATE TABLE IF NOT EXISTS GroupAccont (
+CREATE TABLE IF NOT EXISTS GroupAccount (
     GroupID 					INT,
     AccountID 					INT,
     JoinDate 					DATE
 );
 
-INSERT INTO `GroupAccont` 	(GroupID,AccountID,JoinDate)
+INSERT INTO `GroupAccount` 	(GroupID,AccountID,JoinDate)
 VALUE						('1','1','2019-03-07'),
 							('1','2','2020-03-07'),
                             ('3','3','2020-03-09'),
@@ -154,10 +154,10 @@ CREATE TABLE IF NOT EXISTS Question (
      CategoryID 				INT,
      TypeID 					INT,
      CreatorID 					INT,
-     CreatorDate 				DATE
+     CreateDate 				DATE
 );
 
-INSERT INTO Question 		(QuestionID,Content,CategoryID,TypeID,CreatorID,CreatorDate)
+INSERT INTO Question 		(QuestionID,Content,CategoryID,TypeID,CreatorID,CreateDate)
 VALUE 						('1','Câu Hỏi về Java','1','1','2','2020-04-05'),
 							('2','Câu Hỏi về PHP','10','2','2','2020-04-05'),
 							('3','Hỏi về C#','9','2','3','2020-04-06'),
@@ -175,13 +175,13 @@ DELETE FROM Question WHERE Content LIKE 'Câu Hỏi&' ;
 SELECT QuestionID FROM Question WHERE CategoryID >= '4' ;
 
 CREATE TABLE IF NOT EXISTS Answer (
-     AnswerID 					INT PRIMARY KEY AUTO_INCREMENT,
+     Answers 					INT PRIMARY KEY AUTO_INCREMENT,
      Content 					VARCHAR(50),
      QuestionID 				INT,
-     isCorect 					VARCHAR(50)
+     isCorrect					VARCHAR(50)
 );
 
-INSERT INTO `Answer` 		(AnswerID,Content,QuestionID,isCorect)
+INSERT INTO `Answer` 		(Answers,Content,QuestionID,isCorrect)
 VALUE						('1','Trả lời 01','1','0'),
 							('2','Trả lời 02','1','1'),
 							('3','Trả lời 03','1','0'),
@@ -240,5 +240,4 @@ VALUE					('1','5'),
 						('8','10'),
 						('9','9'),
 						('10','8');
-          -- CÂU 12 EM KHÔNG THAO TÁC ĐƯỢC 
-           -- CÒN CÂU 15 EM ĐANG KO HIỂU ĐỀ BÀI 
+          
